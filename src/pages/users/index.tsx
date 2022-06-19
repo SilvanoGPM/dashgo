@@ -1,12 +1,15 @@
 import Link from 'next/link';
+import { useQuery } from 'react-query';
 
 import {
   Box,
   Button,
+  Center,
   Checkbox,
   Flex,
   Heading,
   Icon,
+  Spinner,
   Table,
   Tbody,
   Td,
@@ -22,19 +25,41 @@ import { RiAddLine } from 'react-icons/ri';
 import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import { Pagination } from 'components/Pagination';
-import { useEffect } from 'react';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}
 
 export default function UsersList() {
+  const { data, isLoading, error } = useQuery(
+    'users',
+    async () => {
+      const response = await fetch('http://localhost:3000/api/users');
+      const data: { users: User[] } = await response.json();
+
+      const users = data.users.map<User>(({ id, name, email, createdAt }) => ({
+        id,
+        name,
+        email,
+        createdAt: new Date(createdAt).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        }),
+      }));
+
+      return users;
+    },
+    { staleTime: 1000 * 5 }, // five seconds,
+  );
+
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/users')
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
 
   return (
     <Box>
@@ -62,39 +87,53 @@ export default function UsersList() {
             </Link>
           </Flex>
 
-          <Table colorScheme="whiteAlpha">
-            <Thead>
-              <Tr>
-                <Th px={['4', '4', '6']} color="gray.300" w="8">
-                  <Checkbox colorScheme="pink" />
-                </Th>
+          {isLoading ? (
+            <Center h="80%">
+              <Spinner />
+            </Center>
+          ) : error ? (
+            <Flex justify="center">
+              <Text>Aconteceu um erro ao procurar usuários.</Text>
+            </Flex>
+          ) : (
+            <>
+              <Table colorScheme="whiteAlpha">
+                <Thead>
+                  <Tr>
+                    <Th px={['4', '4', '6']} color="gray.300" w="8">
+                      <Checkbox colorScheme="pink" />
+                    </Th>
 
-                <Th>Usuário</Th>
-                {isWideVersion && <Th>Data de cadastro</Th>}
-              </Tr>
-            </Thead>
+                    <Th>Usuário</Th>
+                    {isWideVersion && <Th>Data de cadastro</Th>}
+                  </Tr>
+                </Thead>
 
-            <Tbody>
-              <Tr>
-                <Td px={['4', '4', '6']}>
-                  <Checkbox colorScheme="pink" />
-                </Td>
+                <Tbody>
+                  {data?.map((user) => (
+                    <Tr key={user.id}>
+                      <Td px={['4', '4', '6']}>
+                        <Checkbox colorScheme="pink" />
+                      </Td>
 
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Silvano Marques</Text>
-                    <Text fontSize="small" color="gray.300">
-                      silvanosilvino@hotmail.com
-                    </Text>
-                  </Box>
-                </Td>
+                      <Td>
+                        <Box>
+                          <Text fontWeight="bold">{user.name}</Text>
+                          <Text fontSize="small" color="gray.300">
+                            {user.email}
+                          </Text>
+                        </Box>
+                      </Td>
 
-                {isWideVersion && <Td>17 de Junho, 2022</Td>}
-              </Tr>
-            </Tbody>
-          </Table>
+                      {isWideVersion && <Td>{user.createdAt}</Td>}
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
 
-          <Pagination />
+              <Pagination />
+            </>
+          )}
         </Box>
       </Flex>
     </Box>
