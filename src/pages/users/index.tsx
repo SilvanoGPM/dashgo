@@ -26,6 +26,7 @@ import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import { Pagination } from 'components/Pagination';
 import { ResponsiveButton } from 'components/ResponsiveButton';
+import { api } from 'services/api';
 
 interface User {
   id: string;
@@ -38,8 +39,7 @@ export default function UsersList() {
   const { data, isLoading, isFetching, error, refetch } = useQuery(
     'users',
     async () => {
-      const response = await fetch('http://localhost:3000/api/users');
-      const data: { users: User[] } = await response.json();
+      const { data } = await api.get<{ users: User[] }>('/users');
 
       const users = data.users.map<User>(({ id, name, email, createdAt }) => ({
         id,

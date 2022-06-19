@@ -18,6 +18,7 @@
     "@emotion/styled": "^11.9.3",
     "@hookform/resolvers": "^2.9.1",
     "apexcharts": "^3.35.3",
+    "axios": "^0.27.2",
     "chance": "^1.1.8",
     "framer-motion": "^6.3.11",
     "miragejs": "^0.1.45",
