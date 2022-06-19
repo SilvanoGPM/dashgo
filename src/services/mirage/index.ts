@@ -1,5 +1,12 @@
 import { Chance } from 'chance';
-import { createServer, Factory, Model, Response } from 'miragejs';
+
+import {
+  ActiveModelSerializer,
+  createServer,
+  Factory,
+  Model,
+  Response,
+} from 'miragejs';
 
 const chance = new Chance();
 
@@ -11,6 +18,10 @@ interface User {
 
 export function makeServer() {
   const server = createServer({
+    serializers: {
+      application: ActiveModelSerializer,
+    },
+
     models: {
       user: Model.extend<Partial<User>>({}),
     },
