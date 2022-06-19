@@ -3,7 +3,12 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 
 import { SidebarDrawerProvider } from 'contexts/SidebarDrawerContext';
+import { makeServer } from 'services/mirage';
 import { theme } from 'styles/theme';
+
+if (process.env.NODE_ENV === 'development') {
+  makeServer();
+}
 
 function App({ Component, pageProps }: AppProps) {
   return (
