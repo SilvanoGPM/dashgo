@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useQuery } from 'react-query';
 
 import {
   Box,
@@ -26,36 +25,10 @@ import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import { Pagination } from 'components/Pagination';
 import { ResponsiveButton } from 'components/ResponsiveButton';
-import { api } from 'services/api';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-}
+import { useUsers } from 'hooks/api/useUsers';
 
 export default function UsersList() {
-  const { data, isLoading, isFetching, error, refetch } = useQuery(
-    'users',
-    async () => {
-      const { data } = await api.get<{ users: User[] }>('/users');
-
-      const users = data.users.map<User>(({ id, name, email, createdAt }) => ({
-        id,
-        name,
-        email,
-        createdAt: new Date(createdAt).toLocaleDateString('pt-BR', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-        }),
-      }));
-
-      return users;
-    },
-    { staleTime: 1000 * 5 }, // five seconds,
-  );
+  const { data, isLoading, isFetching, error, refetch } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
