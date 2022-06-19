@@ -3,11 +3,11 @@ import { useQuery } from 'react-query';
 
 import {
   Box,
-  Button,
   Center,
   Checkbox,
   Flex,
   Heading,
+  HStack,
   Icon,
   Spinner,
   Table,
@@ -20,11 +20,12 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 
-import { RiAddLine } from 'react-icons/ri';
+import { RiAddLine, RiRefreshLine } from 'react-icons/ri';
 
 import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import { Pagination } from 'components/Pagination';
+import { ResponsiveButton } from 'components/ResponsiveButton';
 
 interface User {
   id: string;
@@ -34,7 +35,7 @@ interface User {
 }
 
 export default function UsersList() {
-  const { data, isLoading, isFetching, error } = useQuery(
+  const { data, isLoading, isFetching, error, refetch } = useQuery(
     'users',
     async () => {
       const response = await fetch('http://localhost:3000/api/users');
@@ -61,6 +62,11 @@ export default function UsersList() {
     lg: true,
   });
 
+  const isMediumVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
+
   return (
     <Box>
       <Header />
@@ -77,17 +83,33 @@ export default function UsersList() {
               )}
             </Heading>
 
-            <Link href="/users/create" passHref>
-              <Button
-                as="a"
+            <HStack>
+              <ResponsiveButton
+                onlyIcon={!isMediumVersion}
+                aria-label="Criar novo usuário"
+                onClick={() => refetch()}
                 size="sm"
                 fontSize="small"
-                colorScheme="pink"
-                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+                colorScheme="purple"
+                leftIcon={<Icon as={RiRefreshLine} fontSize="20" />}
               >
-                Criar novo
-              </Button>
-            </Link>
+                Recarregar
+              </ResponsiveButton>
+
+              <Link href="/users/create" passHref>
+                <ResponsiveButton
+                  onlyIcon={!isMediumVersion}
+                  aria-label="Criar novo usuário"
+                  as="a"
+                  size="sm"
+                  fontSize="small"
+                  colorScheme="pink"
+                  leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+                >
+                  Criar novo
+                </ResponsiveButton>
+              </Link>
+            </HStack>
           </Flex>
 
           {isLoading ? (
