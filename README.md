@@ -1,8 +1,8 @@
-<h1 align="center">Next Boilerplate</h1>
-<p align="center"> Boilerplate for NextJS projects</p>
+<h1 align="center">DashGO</h1>
+<p align="center"> Interfaces dos futuro para dados do futuro.</p>
 
 <p align="center">
-  <img src="public/icons/android-chrome-192x192.png" />
+  <img src="public/favicon.png" width=150 />
 </p>
 
 ## ⚙️ Already configured
