@@ -1,7 +1,9 @@
+import Head from 'next/head';
 import { Button, Flex, Stack } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Router from 'next/router';
 
 import { Input } from 'components/Form/Input';
 
@@ -24,46 +26,54 @@ export default function SignIn() {
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     console.log(data);
+
+    Router.push('/dashboard');
   });
 
   return (
-    <Flex w="100vw" h="100vh" align="center" justify="center">
-      <Flex
-        as="form"
-        w="100%"
-        maxW={360}
-        bg="gray.800"
-        p="8"
-        m={[4, 0]}
-        borderRadius={8}
-        flexDir="column"
-        onSubmit={handleSignIn}
-      >
-        <Stack spacing="4">
-          <Input
-            {...register('email')}
-            error={formState.errors.email}
-            type="email"
-            label="E-mail"
-          />
+    <>
+      <Head>
+        <title>Login - DashGO</title>
+      </Head>
 
-          <Input
-            {...register('password')}
-            error={formState.errors.password}
-            type="password"
-            label="Senha"
-          />
-        </Stack>
-
-        <Button
-          type="submit"
-          mt="6"
-          colorScheme="pink"
-          isLoading={formState.isSubmitting}
+      <Flex w="100vw" h="100vh" align="center" justify="center">
+        <Flex
+          as="form"
+          w="100%"
+          maxW={360}
+          bg="gray.800"
+          p="8"
+          m={[4, 0]}
+          borderRadius={8}
+          flexDir="column"
+          onSubmit={handleSignIn}
         >
-          Entrar
-        </Button>
+          <Stack spacing="4">
+            <Input
+              {...register('email')}
+              error={formState.errors.email}
+              type="email"
+              label="E-mail"
+            />
+
+            <Input
+              {...register('password')}
+              error={formState.errors.password}
+              type="password"
+              label="Senha"
+            />
+          </Stack>
+
+          <Button
+            type="submit"
+            mt="6"
+            colorScheme="pink"
+            isLoading={formState.isSubmitting}
+          >
+            Entrar
+          </Button>
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 }

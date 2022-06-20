@@ -17,8 +17,14 @@ export default function Document() {
 
         <link rel="manifest" href="/manifest.json" />
 
-        <meta name="description" content="Boilerplate for NextJS projects" />
-        <meta name="theme-color" content="#FFFFFF" />
+        <meta
+          name="description"
+          content="Interfaces dos futuro para dados do futuro."
+        />
+
+        <meta name="theme-color" content="#D53F8C" />
+
+        <link rel="shortuct icon" href="/favicon.png" />
       </Head>
       <body>
         <Main />

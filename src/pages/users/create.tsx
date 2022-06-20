@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import {
   Box,
@@ -68,75 +69,81 @@ export default function CreateUser() {
   });
 
   return (
-    <Box>
-      <Header />
+    <>
+      <Head>
+        <title>Criar usuário - DashGO</title>
+      </Head>
 
-      <Flex w="100%" my="6" mx="auto" px="6" maxWidth={1480}>
-        <Sidebar />
+      <Box>
+        <Header />
 
-        <Box
-          as="form"
-          onSubmit={handleCreateUser}
-          flex="1"
-          borderRadius={8}
-          bg="gray.800"
-          p={['6', '8']}
-        >
-          <Heading size="lg" fontWeight="normal">
-            Criar usuário
-          </Heading>
+        <Flex w="100%" my="6" mx="auto" px="6" maxWidth={1480}>
+          <Sidebar />
 
-          <Divider my="6" borderColor="gray.700" />
+          <Box
+            as="form"
+            onSubmit={handleCreateUser}
+            flex="1"
+            borderRadius={8}
+            bg="gray.800"
+            p={['6', '8']}
+          >
+            <Heading size="lg" fontWeight="normal">
+              Criar usuário
+            </Heading>
 
-          <VStack spacing="8">
-            <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
-              <Input
-                {...register('name')}
-                error={formState.errors.name}
-                label="Nome completo"
-              />
+            <Divider my="6" borderColor="gray.700" />
 
-              <Input
-                {...register('email')}
-                error={formState.errors.email}
-                type="email"
-                label="E-mail"
-              />
-            </SimpleGrid>
+            <VStack spacing="8">
+              <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
+                <Input
+                  {...register('name')}
+                  error={formState.errors.name}
+                  label="Nome completo"
+                />
 
-            <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
-              <Input
-                {...register('password')}
-                error={formState.errors.password}
-                type="password"
-                label="Senha"
-              />
+                <Input
+                  {...register('email')}
+                  error={formState.errors.email}
+                  type="email"
+                  label="E-mail"
+                />
+              </SimpleGrid>
 
-              <Input
-                {...register('password_confirmation')}
-                error={formState.errors.password_confirmation}
-                type="password"
-                label="Confirmar senha"
-              />
-            </SimpleGrid>
-          </VStack>
+              <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
+                <Input
+                  {...register('password')}
+                  error={formState.errors.password}
+                  type="password"
+                  label="Senha"
+                />
 
-          <Flex mt="8" justify="flex-end">
-            <HStack spacing={['6', '8']}>
-              <Link href="/users" passHref>
-                <Button colorScheme="whiteAlpha">Cancelar</Button>
-              </Link>
-              <Button
-                colorScheme="pink"
-                type="submit"
-                isLoading={formState.isSubmitting}
-              >
-                Salvar
-              </Button>
-            </HStack>
-          </Flex>
-        </Box>
-      </Flex>
-    </Box>
+                <Input
+                  {...register('password_confirmation')}
+                  error={formState.errors.password_confirmation}
+                  type="password"
+                  label="Confirmar senha"
+                />
+              </SimpleGrid>
+            </VStack>
+
+            <Flex mt="8" justify="flex-end">
+              <HStack spacing={['6', '8']}>
+                <Link href="/users" passHref>
+                  <Button colorScheme="whiteAlpha">Cancelar</Button>
+                </Link>
+                <Button
+                  colorScheme="pink"
+                  type="submit"
+                  isLoading={formState.isSubmitting}
+                >
+                  Salvar
+                </Button>
+              </HStack>
+            </Flex>
+          </Box>
+        </Flex>
+      </Box>
+    </>
   );
 }

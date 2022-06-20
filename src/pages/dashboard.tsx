@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 
@@ -63,34 +64,50 @@ const series = [{ name: 'series1', data: [40, 52, 123, 12, 58, 92, 31] }];
 
 export default function Dashboard() {
   return (
-    <Flex direction="column" h="100vh">
-      <Header />
+    <>
+      <Head>
+        <title>Dashbord - DashGO</title>
+      </Head>
 
-      <Flex w="100%" my="6" mx="auto" px="6" maxWidth={1480}>
-        <Sidebar />
+      <Flex direction="column" h="100vh">
+        <Header />
 
-        <SimpleGrid
-          flex="1"
-          gap="4"
-          minChildWidth="320px"
-          alignItems="flex-start"
-        >
-          <Box p={['6', '8']} pb="4" bg="gray.800" borderRadius={8}>
-            <Text fontSize="large" mb="4">
-              Inscritos da semana
-            </Text>
+        <Flex w="100%" my="6" mx="auto" px="6" maxWidth={1480}>
+          <Sidebar />
 
-            <Chart options={options} series={series} type="area" height={160} />
-          </Box>
+          <SimpleGrid
+            flex="1"
+            gap="4"
+            minChildWidth="320px"
+            alignItems="flex-start"
+          >
+            <Box p={['6', '8']} pb="4" bg="gray.800" borderRadius={8}>
+              <Text fontSize="large" mb="4">
+                Inscritos da semana
+              </Text>
 
-          <Box p={['6', '8']} pb="4" bg="gray.800" borderRadius={8}>
-            <Text fontSize="large" mb="4">
-              Taxa de abertura
-            </Text>
-            <Chart options={options} series={series} type="area" height={160} />
-          </Box>
-        </SimpleGrid>
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
+            </Box>
+
+            <Box p={['6', '8']} pb="4" bg="gray.800" borderRadius={8}>
+              <Text fontSize="large" mb="4">
+                Taxa de abertura
+              </Text>
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
+            </Box>
+          </SimpleGrid>
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 }
