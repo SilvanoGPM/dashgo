@@ -72,7 +72,13 @@ export default function UsersList() {
         <Flex w="100%" my="6" mx="auto" px="6" maxWidth={1480}>
           <Sidebar />
 
-          <Box flex="1" borderRadius={8} bg="gray.800" p="8">
+          <Box
+            flex="1"
+            borderRadius={8}
+            p="8"
+            _dark={{ bg: 'gray.800' }}
+            _light={{ bg: 'gray.100' }}
+          >
             <Flex mb="8" justify="space-between" align="center">
               <Heading size="lg" fontWeight="normal">
                 Usuários

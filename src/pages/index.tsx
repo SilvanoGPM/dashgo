@@ -41,12 +41,13 @@ export default function SignIn() {
           as="form"
           w="100%"
           maxW={360}
-          bg="gray.800"
           p="8"
           m={[4, 0]}
           borderRadius={8}
           flexDir="column"
           onSubmit={handleSignIn}
+          _dark={{ bg: 'gray.800' }}
+          _light={{ bg: 'gray.100' }}
         >
           <Stack spacing="4">
             <Input

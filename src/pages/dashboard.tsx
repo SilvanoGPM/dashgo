@@ -81,7 +81,13 @@ export default function Dashboard() {
             minChildWidth="320px"
             alignItems="flex-start"
           >
-            <Box p={['6', '8']} pb="4" bg="gray.800" borderRadius={8}>
+            <Box
+              p={['6', '8']}
+              pb="4"
+              borderRadius={8}
+              _dark={{ bg: 'gray.800' }}
+              _light={{ bg: 'gray.100' }}
+            >
               <Text fontSize="large" mb="4">
                 Inscritos da semana
               </Text>
@@ -94,12 +100,22 @@ export default function Dashboard() {
               />
             </Box>
 
-            <Box p={['6', '8']} pb="4" bg="gray.800" borderRadius={8}>
+            <Box
+              p={['6', '8']}
+              pb="4"
+              borderRadius={8}
+              _dark={{ bg: 'gray.800' }}
+              _light={{ bg: 'gray.100' }}
+            >
               <Text fontSize="large" mb="4">
                 Taxa de abertura
               </Text>
               <Chart
-                options={options}
+                options={{
+                  ...options,
+                  fill: { colors: [theme.colors.pink[500]] },
+                  stroke: { colors: [theme.colors.pink[500]] },
+                }}
                 series={series}
                 type="area"
                 height={160}

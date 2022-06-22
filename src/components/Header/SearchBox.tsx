@@ -12,19 +12,23 @@ export function SearchBox() {
       ml="6"
       maxW={400}
       alignSelf="center"
-      color="gray.200"
       pos="relative"
-      bg="gray.800"
       borderRadius="full"
       cursor="pointer"
+      _dark={{ color: 'gray.200', bg: 'gray.800' }}
+      _light={{ color: 'gray.700', bg: 'gray.100' }}
     >
       <Input
-        color="gray.50"
         variant="unstyled"
         placeholder="Buscar na plataforma"
         px="4"
         mr="4"
-        _placeholder={{ color: 'gray.400' }}
+        _dark={{ color: 'gray.50' }}
+        _light={{ color: 'gray.900' }}
+        _placeholder={{
+          _dark: { color: 'gray.400' },
+          _light: { color: 'gray.700' },
+        }}
       />
 
       <Icon as={RiSearchLine} fontSize="20" />

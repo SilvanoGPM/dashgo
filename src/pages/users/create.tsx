@@ -85,8 +85,9 @@ export default function CreateUser() {
             onSubmit={handleCreateUser}
             flex="1"
             borderRadius={8}
-            bg="gray.800"
             p={['6', '8']}
+            _dark={{ bg: 'gray.800' }}
+            _light={{ bg: 'gray.100' }}
           >
             <Heading size="lg" fontWeight="normal">
               Criar usuário
@@ -130,8 +131,14 @@ export default function CreateUser() {
             <Flex mt="8" justify="flex-end">
               <HStack spacing={['6', '8']}>
                 <Link href="/users" passHref>
-                  <Button colorScheme="whiteAlpha">Cancelar</Button>
+                  <Button
+                    _dark={{ colorScheme: 'whiteAlpha' }}
+                    _light={{ colorScheme: 'aplhaAlpha' }}
+                  >
+                    Cancelar
+                  </Button>
                 </Link>
+
                 <Button
                   colorScheme="pink"
                   type="submit"

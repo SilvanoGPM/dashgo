@@ -25,7 +25,11 @@ export function Sidebar() {
     return (
       <Drawer isOpen={drawer.isOpen} placement="left" onClose={drawer.onClose}>
         <DrawerOverlay>
-          <DrawerContent bg="gray.800" p="4">
+          <DrawerContent
+            p="4"
+            _dark={{ bg: 'gray.800' }}
+            _light={{ bg: 'gray.100' }}
+          >
             <DrawerCloseButton mt="6"></DrawerCloseButton>
             <DrawerHeader>Navegação</DrawerHeader>
 
