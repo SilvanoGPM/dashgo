@@ -9,9 +9,7 @@ import { makeServer } from 'services/mirage';
 import { theme } from 'styles/theme';
 import { queryClient } from 'services/queryClient';
 
-if (process.env.NODE_ENV === 'development') {
-  makeServer();
-}
+makeServer();
 
 function App({ Component, pageProps }: AppProps) {
   return (
