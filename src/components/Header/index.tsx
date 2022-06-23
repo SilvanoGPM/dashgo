@@ -11,10 +11,16 @@ import { SearchBox } from './SearchBox';
 export function Header() {
   const drawer = useSidebarDrawer();
 
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    lg: true,
+  const screenVersion = useBreakpointValue({
+    base: 0,
+    sm: 1,
+    md: 2,
+    lg: 3,
   });
+
+  const isMediumVersion = (screenVersion || 0) >= 2;
+
+  const isWideVersion = (screenVersion || 0) >= 3;
 
   return (
     <Flex
@@ -42,7 +48,7 @@ export function Header() {
       {isWideVersion && <SearchBox />}
 
       <Flex align="center" ml="auto">
-        <NotificationsNav />
+        <NotificationsNav showOnlyThemeSwitcher={!isMediumVersion} />
 
         <Profile showData={isWideVersion} />
       </Flex>
