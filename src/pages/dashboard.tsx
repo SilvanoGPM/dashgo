@@ -50,6 +50,7 @@ const options = {
   },
 
   fill: {
+    colors: [theme.colors.pink[500]],
     opacity: 0.3,
     type: 'gradient',
     gradient: {
@@ -58,6 +59,7 @@ const options = {
       opacityTo: 0.3,
     },
   },
+  stroke: { colors: [theme.colors.pink[500]] },
 };
 
 const series = [{ name: 'series1', data: [40, 52, 123, 12, 58, 92, 31] }];
@@ -111,11 +113,7 @@ export default function Dashboard() {
                 Taxa de abertura
               </Text>
               <Chart
-                options={{
-                  ...options,
-                  fill: { colors: [theme.colors.pink[500]] },
-                  stroke: { colors: [theme.colors.pink[500]] },
-                }}
+                options={options}
                 series={series}
                 type="area"
                 height={160}
