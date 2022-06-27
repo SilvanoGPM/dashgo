@@ -5,29 +5,16 @@
   <img src="public/favicon.png" width=150 />
 </p>
 
-## ⚙️ Already configured
+## 🚀 Tecnologias utilizadas
 
-- Typescript
-- Jest
-- React Testing Library
-- PWA Support
-- ESLint
-- Prettier
-- Editorconfig
-- Husky
+- [React](https://pt-br.reactjs.org/)
+- [Next](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Chakra UI](https://chakra-ui.com/)
+- [Jest](https://jestjs.io/pt-BR/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Rawg API](https://rawg.io/apidocs)
 
-## 🔨 How to use
+## ❤️ Agradecimentos
 
-In terminal use:
-
-```bash
-# npm
-npx create-next-app -e https://github.com/SkyG0D/next-boilerplate
-
-# yarn
-yarn create next-app -e https://github.com/SkyG0D/next-boilerplate
-```
-
-## ❤️ Contributions
-
-Open a PR to contribute to the project.
+- [Ignite](https://www.rocketseat.com.br/ignite)
