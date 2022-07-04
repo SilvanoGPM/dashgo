@@ -13,7 +13,6 @@
 - [Chakra UI](https://chakra-ui.com/)
 - [Jest](https://jestjs.io/pt-BR/)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [Rawg API](https://rawg.io/apidocs)
 
 ## ❤️ Agradecimentos
 
